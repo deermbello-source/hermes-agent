@@ -1,0 +1,71 @@
+# Default ConstraintSet for the macro kernel.
+#
+# Constraints define what must remain preserved across lawful transitions.
+# Every judgment records the sha256 of the exact constraint set it was made
+# under. Edit a copy and pass it with --constraints to use your own.
+
+schema_version = 1
+
+[[constraint]]
+id = "no-forbidden-kinds"
+description = "Transition kinds that are never admissible on this machine."
+kind = "forbid_kinds"
+kinds = []
+
+[[constraint]]
+id = "protected-paths"
+description = "System-defining paths no transition may delete or write into."
+kind = "protect_paths"
+paths = [
+    # Linux
+    "/boot",
+    "/etc",
+    "/usr",
+    "/bin",
+    "/sbin",
+    "/lib",
+    "/proc",
+    "/sys",
+    "/dev",
+    # Windows
+    "C:/Windows",
+    "C:/Program Files",
+    "C:/Program Files (x86)",
+]
+
+[[constraint]]
+id = "protected-processes"
+description = "Identity-critical processes that must not be killed."
+kind = "protect_processes"
+names = [
+    # Linux
+    "systemd",
+    "init",
+    "sshd",
+    # Windows
+    "wininit.exe",
+    "winlogon.exe",
+    "csrss.exe",
+    "lsass.exe",
+    "services.exe",
+    "smss.exe",
+]
+
+[[constraint]]
+id = "protected-services"
+description = "Services that must not be stopped or restarted."
+kind = "protect_services"
+names = [
+    # Linux
+    "ssh",
+    "sshd",
+    "systemd-journald",
+    "dbus",
+    # Windows
+    "RpcSs",
+    "WinDefend",
+    "EventLog",
+    "Dhcp",
+    "Dnscache",
+    "LSM",
+]

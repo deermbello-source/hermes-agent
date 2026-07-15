@@ -1,0 +1,18 @@
+[package]
+name = "macro-kernel"
+version = "0.1.0"
+edition = "2021"
+description = "A user-space governing kernel: reads the machine as a bounded structure, models its state, proposes candidate transitions, and judges lawfulness. Read-only by design in milestone 1."
+license = "MIT"
+
+[[bin]]
+name = "mkernel"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+sha2 = "0.10"
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
